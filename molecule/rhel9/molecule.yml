@@ -24,6 +24,7 @@ provisioner:
   inventory:
     host_vars:
       rhel9:
+        nginx_stable_repo: false
   options:
     v: true
     diff: true
