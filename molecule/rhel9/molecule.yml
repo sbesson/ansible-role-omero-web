@@ -1,0 +1,36 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: molecule/resources/requirements.yml
+driver:
+  name: docker
+lint: |
+    yamllint .
+    ansible-lint
+    flake8
+platforms:
+  - name: rhel9
+    image: redhat/ubi9-init
+    privileged: true
+    tmpfs:
+      - /sys/fs/cgroup
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  playbooks:
+    converge: ../resources/playbook.yml
+  inventory:
+    host_vars:
+      rhel9:
+  options:
+    v: true
+    diff: true
+scenario:
+  name: rhel9
+  converge_sequence:
+    - converge
+verifier:
+  name: testinfra
+  directory: ../resources/tests/

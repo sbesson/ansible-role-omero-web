@@ -9,6 +9,8 @@ galaxy_info:
     - name: EL
       versions:
         - 7
+      versions:
+        - 9
     - name: Ubuntu
       versions:
         - bionic
